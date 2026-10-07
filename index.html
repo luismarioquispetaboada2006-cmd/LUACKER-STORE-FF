@@ -20,7 +20,7 @@
 
     header {
       background: #151522;
-      padding: 25px 15px;
+      padding: 28px 15px;
       text-align: center;
       border-bottom: 2px solid #7c3cff;
     }
@@ -59,7 +59,7 @@
     }
 
     .diamantes {
-      font-size: 20px;
+      font-size: 19px;
       font-weight: bold;
     }
 
@@ -70,10 +70,9 @@
     }
 
     .boton {
-      display: block;
       width: 100%;
       padding: 15px;
-      margin-top: 20px;
+      margin-top: 10px;
       border: none;
       border-radius: 12px;
       background: #7c3cff;
@@ -87,11 +86,35 @@
       background: #925cff;
     }
 
-    .info {
+    .formulario {
       background: #151522;
-      padding: 18px;
+      padding: 20px;
       border-radius: 15px;
       margin-top: 25px;
+    }
+
+    .formulario h2 {
+      margin-bottom: 15px;
+      text-align: center;
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      border-radius: 10px;
+      border: 1px solid #33334a;
+      background: #0f0f18;
+      color: white;
+      font-size: 16px;
+    }
+
+    .resultado {
+      margin-top: 15px;
+      padding: 15px;
+      border-radius: 10px;
+      background: #202033;
+      display: none;
       line-height: 1.6;
     }
 
@@ -105,63 +128,119 @@
 
 <body>
 
-  <header>
-    <h1>🔥 LUACKER STORE</h1>
-    <p>Recargas Free Fire 🇧🇴</p>
-  </header>
+<header>
+  <h1>🔥 LUACKER STORE</h1>
+  <p>Recargas Free Fire 🇧🇴</p>
+</header>
 
-  <main class="contenedor">
+<main class="contenedor">
 
-    <h2 class="titulo">💎 DIAMANTES</h2>
+  <h2 class="titulo">💎 DIAMANTES</h2>
 
-    <div class="producto">
-      <span class="diamantes">💎 100 Diamantes</span>
-      <span class="precio">Bs 8</span>
-    </div>
+  <div class="producto">
+    <span class="diamantes">💎 100 Diamantes</span>
+    <span class="precio">Bs 8</span>
+  </div>
 
-    <div class="producto">
-      <span class="diamantes">💎 310 Diamantes</span>
-      <span class="precio">Bs 22</span>
-    </div>
+  <div class="producto">
+    <span class="diamantes">💎 310 Diamantes</span>
+    <span class="precio">Bs 22</span>
+  </div>
 
-    <div class="producto">
-      <span class="diamantes">💎 520 Diamantes</span>
-      <span class="precio">Bs 35</span>
-    </div>
+  <div class="producto">
+    <span class="diamantes">💎 520 Diamantes</span>
+    <span class="precio">Bs 35</span>
+  </div>
 
-    <div class="producto">
-      <span class="diamantes">💎 1060 Diamantes</span>
-      <span class="precio">Bs 70</span>
-    </div>
+  <div class="producto">
+    <span class="diamantes">💎 1060 Diamantes</span>
+    <span class="precio">Bs 70</span>
+  </div>
 
-    <div class="producto">
-      <span class="diamantes">💎 2180 Diamantes</span>
-      <span class="precio">Bs 140</span>
-    </div>
+  <div class="producto">
+    <span class="diamantes">💎 2180 Diamantes</span>
+    <span class="precio">Bs 140</span>
+  </div>
 
-    <button class="boton" onclick="comprar()">
-      🛒 COMPRAR AHORA
+  <section class="formulario">
+
+    <h2>🛒 Realizar pedido</h2>
+
+    <label>Elige tu paquete:</label>
+
+    <select id="paquete">
+      <option value="100 Diamantes - Bs 8">
+        100 Diamantes - Bs 8
+      </option>
+
+      <option value="310 Diamantes - Bs 22">
+        310 Diamantes - Bs 22
+      </option>
+
+      <option value="520 Diamantes - Bs 35">
+        520 Diamantes - Bs 35
+      </option>
+
+      <option value="1060 Diamantes - Bs 70">
+        1060 Diamantes - Bs 70
+      </option>
+
+      <option value="2180 Diamantes - Bs 140">
+        2180 Diamantes - Bs 140
+      </option>
+    </select>
+
+    <input
+      type="text"
+      id="idff"
+      placeholder="🆔 ID de Free Fire"
+    >
+
+    <input
+      type="text"
+      id="contacto"
+      placeholder="📱 Número de contacto"
+    >
+
+    <button class="boton" onclick="crearPedido()">
+      ✅ CONFIRMAR PEDIDO
     </button>
 
-    <div class="info">
-      <h3>⚡ ¿Cómo comprar?</h3>
-      <p>1. Elige tu paquete.</p>
-      <p>2. Ingresa tu ID de Free Fire.</p>
-      <p>3. Confirma tu pedido.</p>
-      <p>4. Recibirás el estado de tu pedido.</p>
-    </div>
+    <div class="resultado" id="resultado"></div>
 
-  </main>
+  </section>
 
-  <footer>
-    © 2026 LUACKER STORE
-  </footer>
+</main>
 
-  <script>
-    function comprar() {
-      alert("Próximamente podrás realizar tu pedido desde aquí.");
-    }
-  </script>
+<footer>
+  © 2026 LUACKER STORE
+</footer>
+
+<script>
+function crearPedido() {
+
+  const paquete = document.getElementById("paquete").value;
+  const idff = document.getElementById("idff").value;
+  const contacto = document.getElementById("contacto").value;
+  const resultado = document.getElementById("resultado");
+
+  if (idff === "" || contacto === "") {
+    resultado.style.display = "block";
+    resultado.innerHTML =
+      "⚠️ Completa tu ID de Free Fire y tu número de contacto.";
+    return;
+  }
+
+  resultado.style.display = "block";
+
+  resultado.innerHTML =
+    "<strong>✅ Pedido preparado</strong><br><br>" +
+    "💎 Paquete: " + paquete + "<br>" +
+    "🆔 ID: " + idff + "<br>" +
+    "📱 Contacto: " + contacto + "<br><br>" +
+    "📦 Tu pedido está listo para ser procesado.";
+}
+</script>
 
 </body>
 </html>
